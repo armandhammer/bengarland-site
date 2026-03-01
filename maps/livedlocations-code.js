@@ -26,7 +26,7 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
 
 // Define linear scale for output
 var color = d3.scale.linear()
-	.range(["#f7f7f7", "#41b6c4", "#253494", "#ffffcc"]);
+	.range(["#969696", "#41b6c4", "#253494", "#ffffcc"]);
 
 var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
 
@@ -91,7 +91,7 @@ d3.csv("stateslived.csv", function (data) {
 					return color(value);
 				} else {
 					//If value is undefined…
-					return "#f7f7f7";
+					return "#969696";
 				}
 			});
 
