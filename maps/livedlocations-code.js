@@ -26,7 +26,7 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
 
 // Define linear scale for output
 var color = d3.scale.linear()
-	.range(["rgb(213,222,217)", "rgb(69,173,168)", "rgb(84,36,55)", "rgb(217,91,67)"]);
+	.range(["#f7f7f7", "#41b6c4", "#253494", "#ffffcc"]);
 
 var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
 
@@ -91,7 +91,7 @@ d3.csv("stateslived.csv", function (data) {
 					return color(value);
 				} else {
 					//If value is undefined…
-					return "rgb(213,222,217)";
+					return "#f7f7f7";
 				}
 			});
 
@@ -112,7 +112,7 @@ d3.csv("stateslived.csv", function (data) {
 				.attr("r", function (d) {
 					return Math.sqrt(d.years) * 4;
 				})
-				.style("fill", "rgb(217,91,67)")
+				.style("fill", "#ffffcc")
 				.style("opacity", 0.85)
 
 				// Modification of custom tooltip code provided by Malcolm Maclean, "D3 Tips and Tricks" 
