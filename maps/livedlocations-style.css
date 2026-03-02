@@ -1,4 +1,4 @@
-/* Center everything on the page */
+
 body {
   max-width: 800px;
   margin: 0 auto;
@@ -37,7 +37,7 @@ body {
 
 /* Legend Position Style */
 .legend {
-    position: absolute;
-    right: 10px;
-    top: 330px;
-}  
+	position: absolute;
+	left: 800px;
+	top: 350px;
+}
