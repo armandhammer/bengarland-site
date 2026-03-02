@@ -5,10 +5,8 @@ body {
   padding: 20px;
 }
 
-/* Use div to position map on page */
-#visitmap {
-    position: relative;
-}
+#visitmap { position: relative; }
+.tooltip  { position: absolute; }
 
 /* On mouse hover, lighten state color */
 path:hover {
