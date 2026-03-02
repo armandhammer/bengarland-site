@@ -35,10 +35,9 @@ body {
 	font: 11px sans-serif;
 }
 
-/* Legend Position Style
+/* Legend Position Style */
 .legend {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    left: 780px;
+    top: 350px;
 }
-*/ 

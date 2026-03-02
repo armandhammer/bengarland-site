@@ -94,22 +94,22 @@ d3.csv("stateslived.csv", function (data) {
 					return "#969696";
 				}
 			})
-			.on("mouseover", function (d) {
-				div.transition()
-					.duration(200)
-					.style("opacity", .9);
+		.on("mouseover", function (d) {
+			div.transition()
+				.duration(200)
+				.style("opacity", .9);
 
-				div.html(d.properties.name +
-					"<br/>Visited times: " + d.properties.visited)
-					.style("left", (d3.event.pageX) + "px")
-					.style("top", (d3.event.pageY - 28) + "px");
-			})
-			.on("mouseout", function (d) {
+			div.html(d.properties.name +
+				"<br/>Visited times: " + d.properties.visited)
+				.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+		})
+		.on("mouseout", function (d) {
 
-				div.transition()
-					.duration(500)
-					.style("opacity", 0);
-			});
+			div.transition()
+				.duration(500)
+				.style("opacity", 0);
+		});
 
 
 		// Map the cities I have lived in!
@@ -151,16 +151,15 @@ d3.csv("stateslived.csv", function (data) {
 		});
 
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-		var legend = svg.append("g")
+		var legend = d3.select("#visitmap").append("svg")
 			.attr("class", "legend")
-			.attr("transform", "translate(780,350)")
+			.attr("width", 140)
+			.attr("height", 200)
 			.selectAll("g")
 			.data(color.domain().slice().reverse())
 			.enter()
 			.append("g")
-			.attr("transform", function (d, i) {
-				return "translate(0," + i * 20 + ")";
-			});
+			.attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
 
 		legend.append("rect")
 			.attr("width", 18)
