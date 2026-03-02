@@ -151,14 +151,10 @@ d3.csv("stateslived.csv", function (data) {
 		});
 
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-		// Create legend container INSIDE svg
 		var legend = svg.append("g")
 			.attr("class", "legend")
-			.attr("transform", "translate(780,350)");  // position legend here
-
-
-		// Create one row per legend item
-		var legendRow = legend.selectAll("g")
+			.attr("transform", "translate(780,350)")
+			.selectAll("g")
 			.data(color.domain().slice().reverse())
 			.enter()
 			.append("g")
@@ -166,16 +162,12 @@ d3.csv("stateslived.csv", function (data) {
 				return "translate(0," + i * 20 + ")";
 			});
 
-
-		// Color boxes
-		legendRow.append("rect")
+		legend.append("rect")
 			.attr("width", 18)
 			.attr("height", 18)
 			.style("fill", color);
 
-
-		// Text labels
-		legendRow.append("text")
+		legend.append("text")
 			.data(legendText)
 			.attr("x", 24)
 			.attr("y", 9)
