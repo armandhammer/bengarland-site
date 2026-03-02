@@ -100,7 +100,7 @@ d3.csv("stateslived.csv", function (data) {
 					.style("opacity", .9);
 
 				div.html(d.properties.name +
-					"<br/>Visited times: " + d.properties.visited)
+					"<br/>Visited times: " + d.properties.visited);
 				var container = d3.select("#visitmap").node();
 				var rect = container.getBoundingClientRect();
 				div.style("left", (d3.event.clientX - rect.left) + "px")
@@ -139,7 +139,7 @@ d3.csv("stateslived.csv", function (data) {
 					div.transition()
 						.duration(200)
 						.style("opacity", .9);
-					div.html(d.place + "<br/>Years lived: " + d.years)
+					div.html(d.place + "<br/>Years lived: " + d.years);
 					var container = d3.select("#visitmap").node();
 					var rect = container.getBoundingClientRect();
 					div.style("left", (d3.event.clientX - rect.left) + "px")
