@@ -1,3 +1,8 @@
+/* Use div to position map on page */
+#visitmap {
+    position: relative;
+}
+
 /* On mouse hover, lighten state color */
 path:hover {
 	fill-opacity: .7;
