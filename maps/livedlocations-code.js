@@ -94,22 +94,24 @@ d3.csv("stateslived.csv", function (data) {
 					return "#969696";
 				}
 			})
-		.on("mouseover", function (d) {
-			div.transition()
-				.duration(200)
-				.style("opacity", .9);
+			.on("mouseover", function (d) {
+				div.transition()
+					.duration(200)
+					.style("opacity", .9);
 
-			div.html(d.properties.name +
-				"<br/>Visited times: " + d.properties.visited)
-				.style("left", (d3.event.pageX) + "px")
-				.style("top", (d3.event.pageY - 28) + "px");
-		})
-		.on("mouseout", function (d) {
+				div.html(d.properties.name +
+					"<br/>Visited times: " + d.properties.visited)
+				var container = d3.select("#visitmap").node();
+				var rect = container.getBoundingClientRect();
+				div.style("left", (d3.event.clientX - rect.left) + "px")
+					.style("top", (d3.event.clientY - rect.top - 28) + "px");
+			})
+			.on("mouseout", function (d) {
 
-			div.transition()
-				.duration(500)
-				.style("opacity", 0);
-		});
+				div.transition()
+					.duration(500)
+					.style("opacity", 0);
+			});
 
 
 		// Map the cities I have lived in!
@@ -138,8 +140,10 @@ d3.csv("stateslived.csv", function (data) {
 						.duration(200)
 						.style("opacity", .9);
 					div.html(d.place + "<br/>Years lived: " + d.years)
-						.style("left", (d3.event.pageX) + "px")
-						.style("top", (d3.event.pageY - 28) + "px");
+					var container = d3.select("#visitmap").node();
+					var rect = container.getBoundingClientRect();
+					div.style("left", (d3.event.clientX - rect.left) + "px")
+						.style("top", (d3.event.clientY - rect.top - 28) + "px");
 				})
 
 				// fade out tooltip on mouse out               
