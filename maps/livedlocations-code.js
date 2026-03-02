@@ -155,13 +155,13 @@ d3.csv("stateslived.csv", function (data) {
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
 		var legend = d3.select("#visitmap").append("svg")
 			.attr("class", "legend")
-			.attr("transform", "translate(" + (width - 140) + "," + (height - 120) + ")")
 			.attr("width", 140)
 			.attr("height", 200)
 			.selectAll("g")
 			.data(color.domain().slice().reverse())
 			.enter()
-			.append("g");
+			.append("g")
+			.attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
 
 		legend.append("rect")
 			.attr("width", 18)
