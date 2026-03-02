@@ -20,11 +20,11 @@ div.tooltip {
 	width: auto;
 	height: auto;
 	white-space: nowrap;
-	padding: 2px;
+	padding: 4px;
 	font: 12px sans-serif;
 	background: white;
 	border: 0px;
-	border-radius: 8px;
+	border-radius: 6px;
 	pointer-events: none;
 }
 
