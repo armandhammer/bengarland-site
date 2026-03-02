@@ -153,27 +153,38 @@ d3.csv("stateslived.csv", function (data) {
 		});
 
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-		var legend = d3.select("#visitmap").append("svg")
+		// Put legend near bottom-right of the SVG drawing area
+		var legendX = width - 140;   // move left/right by changing 140
+		var legendY = height - 120;  // move up/down by changing 120
+
+		// Legend container (one group)
+		var legendG = svg.append("g")
 			.attr("class", "legend")
-			.attr("width", 140)
-			.attr("height", 200)
-			.selectAll("g")
+			.attr("transform", "translate(" + legendX + "," + legendY + ")");
+
+		// One row per item (this is what prevents stacking)
+		var rows = legendG.selectAll("g")
 			.data(color.domain().slice().reverse())
 			.enter()
 			.append("g")
-			.attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+			.attr("transform", function (d, i) {
+				return "translate(0," + (i * 20) + ")";
+			});
 
-		legend.append("rect")
+		// Color boxes
+		rows.append("rect")
 			.attr("width", 18)
 			.attr("height", 18)
 			.style("fill", color);
 
-		legend.append("text")
-			.data(legendText)
+		// Text labels (match the reversed order)
+		rows.append("text")
 			.attr("x", 24)
 			.attr("y", 9)
 			.attr("dy", ".35em")
-			.text(function (d) { return d; });
+			.text(function (d, i) {
+				return legendText[legendText.length - 1 - i];
+			});
 	});
 
 });
