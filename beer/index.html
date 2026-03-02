@@ -83,11 +83,17 @@
 var map = L.map('map');
 var breweryMarkers = new L.FeatureGroup();
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-  id: '<your id here>',
-  accessToken: '<your token here>',
-  maxZoom: 16
+// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+//   id: '<your id here>',
+//   accessToken: '<your token here>',
+//   maxZoom: 16
+// } ).addTo(map);
+
+L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: '&copy; <a href="http://www.openstreetmaps.org/copyright">OpenStreetMap</a>'
 } ).addTo(map);
+
 
 
 /* Parse JSON file, create charts, draw markers on map */
