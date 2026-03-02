@@ -31,13 +31,13 @@ var color = d3.scale.linear()
 var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
 
 //Create SVG element and append map to the SVG
-var svg = d3.select("body")
+var svg = d3.select("#visitmap")
 	.append("svg")
 	.attr("width", width)
 	.attr("height", height);
 
 // Append Div for tooltip to SVG
-var div = d3.select("body")
+var div = d3.select("#visitmap")
 	.append("div")
 	.attr("class", "tooltip")
 	.style("opacity", 0);
@@ -95,7 +95,6 @@ d3.csv("stateslived.csv", function (data) {
 				}
 			})
 		.on("mouseover", function (d) {
-
 			div.transition()
 				.duration(200)
 				.style("opacity", .9);
@@ -152,7 +151,7 @@ d3.csv("stateslived.csv", function (data) {
 		});
 
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-		var legend = d3.select("body").append("svg")
+		var legend = d3.select("#visitmap").append("svg")
 			.attr("class", "legend")
 			.attr("width", 140)
 			.attr("height", 200)
