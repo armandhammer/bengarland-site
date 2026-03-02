@@ -37,7 +37,7 @@ var svg = d3.select("#visitmap")
 	.attr("height", height);
 
 // Append Div for tooltip to SVG
-var div = d3.select("body")
+var div = d3.select("#visitmap")
 	.append("div")
 	.attr("class", "tooltip")
 	.style("opacity", 0);
@@ -94,23 +94,22 @@ d3.csv("stateslived.csv", function (data) {
 					return "#969696";
 				}
 			})
-			.on("mouseover", function (d) {
-				div.transition()
-					.duration(200)
-					.style("opacity", .9);
+		.on("mouseover", function (d) {
+			div.transition()
+				.duration(200)
+				.style("opacity", .9);
 
-				div.html(d.properties.name +
-					"<br/>Visited times: " + d.properties.visited)
-				var coords = d3.mouse(this);
-				div.style("left", coords[0] + "px")
-					.style("top", (coords[1] - 28) + "px");
-			})
-			.on("mouseout", function (d) {
+			div.html(d.properties.name +
+				"<br/>Visited times: " + d.properties.visited)
+				.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+		})
+		.on("mouseout", function (d) {
 
-				div.transition()
-					.duration(500)
-					.style("opacity", 0);
-			});
+			div.transition()
+				.duration(500)
+				.style("opacity", 0);
+		});
 
 
 		// Map the cities I have lived in!
@@ -139,9 +138,8 @@ d3.csv("stateslived.csv", function (data) {
 						.duration(200)
 						.style("opacity", .9);
 					div.html(d.place + "<br/>Years lived: " + d.years)
-					var coords = d3.mouse(this);
-					div.style("left", coords[0] + "px")
-						.style("top", (coords[1] - 28) + "px");
+						.style("left", (d3.event.pageX) + "px")
+						.style("top", (d3.event.pageY - 28) + "px");
 				})
 
 				// fade out tooltip on mouse out               
@@ -153,38 +151,27 @@ d3.csv("stateslived.csv", function (data) {
 		});
 
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-		// Put legend near bottom-right of the SVG drawing area
-		var legendX = width - 140;   // move left/right by changing 140
-		var legendY = height - 120;  // move up/down by changing 120
-
-		// Legend container (one group)
-		var legendG = svg.append("g")
+		var legend = d3.select("#visitmap").append("svg")
 			.attr("class", "legend")
-			.attr("transform", "translate(" + legendX + "," + legendY + ")");
-
-		// One row per item (this is what prevents stacking)
-		var rows = legendG.selectAll("g")
+			.attr("width", 140)
+			.attr("height", 200)
+			.selectAll("g")
 			.data(color.domain().slice().reverse())
 			.enter()
 			.append("g")
-			.attr("transform", function (d, i) {
-				return "translate(0," + (i * 20) + ")";
-			});
+			.attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
 
-		// Color boxes
-		rows.append("rect")
+		legend.append("rect")
 			.attr("width", 18)
 			.attr("height", 18)
 			.style("fill", color);
 
-		// Text labels (match the reversed order)
-		rows.append("text")
+		legend.append("text")
+			.data(legendText)
 			.attr("x", 24)
 			.attr("y", 9)
 			.attr("dy", ".35em")
-			.text(function (d, i) {
-				return legendText[legendText.length - 1 - i];
-			});
+			.text(function (d) { return d; });
 	});
 
 });
