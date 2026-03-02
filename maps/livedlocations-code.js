@@ -151,7 +151,7 @@ d3.csv("stateslived.csv", function (data) {
 		});
 
 		// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-		var legend = d3.select("#visitmap").append("svg")
+		var legend = svg.append("g") // Change legend to appear inside map container
 			.attr("class", "legend")
 			.attr("width", 140)
 			.attr("height", 200)
@@ -159,7 +159,7 @@ d3.csv("stateslived.csv", function (data) {
 			.data(color.domain().slice().reverse())
 			.enter()
 			.append("g")
-			.attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+			.attr("transform", "translate(780,350)");
 
 		legend.append("rect")
 			.attr("width", 18)
