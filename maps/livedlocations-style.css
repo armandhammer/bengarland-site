@@ -1,3 +1,10 @@
+/* Center everything on the page */
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 /* Use div to position map on page */
 #visitmap {
     position: relative;
