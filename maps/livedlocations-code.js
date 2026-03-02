@@ -37,7 +37,7 @@ var svg = d3.select("#visitmap")
 	.attr("height", height);
 
 // Append Div for tooltip to SVG
-var div = d3.select("#visitmap")
+var div = d3.select("body")
 	.append("div")
 	.attr("class", "tooltip")
 	.style("opacity", 0);
