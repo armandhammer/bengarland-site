@@ -2,17 +2,6 @@
 var width = 700;
 var height = 400;
 
-// Margins
-var margin = {
-  top: 20,
-  right: 20,
-  bottom: 60,
-  left: 60
-};
-
-var innerWidth = width - margin.left - margin.right;
-var innerHeight = height - margin.top - margin.bottom;
-
 // Create SVG
 var svg = d3.select("#chart")
   .append("svg")
@@ -21,10 +10,6 @@ var svg = d3.select("#chart")
 
 // Border for user visibility
 svg.style("border", "1px solid black");
-
-// Create chart group
-var chartGroup = svg.append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Load the CSV file
 d3.csv("fruit.csv").then(function (data) {
@@ -39,7 +24,7 @@ d3.csv("fruit.csv").then(function (data) {
     .domain(data.map(function (d) {
       return d.category;
     }))
-    .range([0, innerWidth])
+    .range([0, width])
     .padding(0.2);
 
   // Create y scale
@@ -47,7 +32,7 @@ d3.csv("fruit.csv").then(function (data) {
     .domain([0, d3.max(data, function (d) {
       return d.value;
     })])
-    .range([innerHeight, 0]);
+    .range([height, 0]);
 
   // Log scale domains for verification
   console.log(xScale.domain());
