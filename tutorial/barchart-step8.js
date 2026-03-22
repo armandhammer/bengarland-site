@@ -3,12 +3,7 @@ var width = 700;
 var height = 400;
 
 // Margins
-var margin = {
-  top: 20,
-  right: 20,
-  bottom: 60,
-  left: 60
-};
+var margin = { top: 20, right: 20, bottom: 60, left: 60 };
 
 var innerWidth = width - margin.left - margin.right;
 var innerHeight = height - margin.top - margin.bottom;
