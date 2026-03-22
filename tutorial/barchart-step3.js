@@ -19,7 +19,7 @@ var svg = d3.select("#chart")
   .attr("width", width)
   .attr("height", height);
 
-// Optional border (keep it for visibility)
+// Border for user visibility
 svg.style("border", "1px solid black");
 
 // Create chart group (this shifts everything by margins)
