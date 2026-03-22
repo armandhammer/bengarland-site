@@ -26,23 +26,27 @@ svg.style("border", "1px solid black");
 var chartGroup = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Load data
-d3.csv("fruit.csv").then(function(data) {
+// Load the CSV file
+d3.csv("fruit.csv").then(function (data) {
 
   // Convert value to number
-  data.forEach(function(d) {
+  data.forEach(function (d) {
     d.value = +d.value;
   });
 
-  // X scale
+  // Create x scale
   var xScale = d3.scaleBand()
-    .domain(data.map(function(d) { return d.category; }))
+    .domain(data.map(function (d) {
+      return d.category;
+    }))
     .range([0, innerWidth])
     .padding(0.2);
 
-  // Y scale
+  // Create y scale
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return d.value; })])
+    .domain([0, d3.max(data, function (d) {
+      return d.value;
+    })])
     .range([innerHeight, 0]);
 
   // Add x-axis

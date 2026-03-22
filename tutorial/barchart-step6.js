@@ -26,7 +26,7 @@ svg.style("border", "1px solid black");
 var chartGroup = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Load data
+// Load the CSV file
 d3.csv("fruit.csv").then(function (data) {
 
   // Convert value to number
@@ -34,15 +34,19 @@ d3.csv("fruit.csv").then(function (data) {
     d.value = +d.value;
   });
 
-  // X scale
+  // Create x scale
   var xScale = d3.scaleBand()
-    .domain(data.map(function (d) { return d.category; }))
+    .domain(data.map(function (d) {
+      return d.category;
+    }))
     .range([0, innerWidth])
     .padding(0.2);
 
-  // Y scale
+  // Create y scale
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, function (d) { return d.value; })])
+    .domain([0, d3.max(data, function (d) {
+      return d.value;
+    })])
     .range([innerHeight, 0]);
 
   // Add x-axis
@@ -60,10 +64,16 @@ d3.csv("fruit.csv").then(function (data) {
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function (d) { return xScale(d.category); })
-    .attr("y", function (d) { return yScale(d.value); })
+    .attr("x", function (d) {
+      return xScale(d.category);
+    })
+    .attr("y", function (d) {
+      return yScale(d.value);
+    })
     .attr("width", xScale.bandwidth())
-    .attr("height", function (d) { return innerHeight - yScale(d.value); })
+    .attr("height", function (d) {
+      return innerHeight - yScale(d.value);
+    })
     .attr("fill", "steelblue");
 
   // Add value labels above the bars

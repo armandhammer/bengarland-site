@@ -22,30 +22,34 @@ var svg = d3.select("#chart")
 // Border for user visibility
 svg.style("border", "1px solid black");
 
-// Create chart group (this shifts everything by margins)
+// Create chart group
 var chartGroup = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Load data
+// Load the CSV file
 d3.csv("fruit.csv").then(function (data) {
 
-  // Convert to numbers
+  // Convert value to number
   data.forEach(function (d) {
     d.value = +d.value;
   });
 
-  // Create x scale (categories)
+  // Create x scale
   var xScale = d3.scaleBand()
-    .domain(data.map(function (d) { return d.category; }))
+    .domain(data.map(function (d) {
+      return d.category;
+    }))
     .range([0, innerWidth])
     .padding(0.2);
 
-  // Create y scale (values)
+  // Create y scale
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, function (d) { return d.value; })])
+    .domain([0, d3.max(data, function (d) {
+      return d.value;
+    })])
     .range([innerHeight, 0]);
 
-  // Log scales for verification
+  // Log scale domains for verification
   console.log(xScale.domain());
   console.log(yScale.domain());
 

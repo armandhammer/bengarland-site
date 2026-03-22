@@ -26,90 +26,104 @@ svg.style("border", "1px solid black");
 var chartGroup = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Load data
-d3.csv("fruit.csv").then(function(data) {
+// Load the CSV file
+d3.csv("fruit.csv").then(function (data) {
 
-  // Convert values
-  data.forEach(function(d) {
+  // Convert value to number
+  data.forEach(function (d) {
     d.value = +d.value;
   });
 
   // Create a copy for sorting
   var currentData = data.slice();
 
-  // X scale
+  // Create x scale
   var xScale = d3.scaleBand()
-    .domain(currentData.map(function(d) { return d.category; }))
+    .domain(currentData.map(function (d) {
+      return d.category;
+    }))
     .range([0, innerWidth])
     .padding(0.2);
 
-  // Y scale
+  // Create y scale
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(currentData, function(d) { return d.value; })])
+    .domain([0, d3.max(currentData, function (d) {
+      return d.value;
+    })])
     .range([innerHeight, 0]);
 
-  // X axis
+  // Add x-axis
   var xAxisGroup = chartGroup.append("g")
     .attr("transform", "translate(0," + innerHeight + ")")
     .call(d3.axisBottom(xScale));
 
-  // Y axis
+  // Add y-axis
   chartGroup.append("g")
     .call(d3.axisLeft(yScale));
 
-  // Bars
+  // Draw bars
   var bars = chartGroup.selectAll(".bar")
     .data(currentData)
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return xScale(d.category); })
-    .attr("y", function(d) { return yScale(d.value); })
+    .attr("x", function (d) {
+      return xScale(d.category);
+    })
+    .attr("y", function (d) {
+      return yScale(d.value);
+    })
     .attr("width", xScale.bandwidth())
-    .attr("height", function(d) { return innerHeight - yScale(d.value); })
+    .attr("height", function (d) {
+      return innerHeight - yScale(d.value);
+    })
     .attr("fill", "steelblue");
 
-  // Labels
+  // Add value labels
   var labels = chartGroup.selectAll(".value-label")
     .data(currentData)
     .enter()
     .append("text")
     .attr("class", "value-label")
-    .attr("x", function(d) {
+    .attr("x", function (d) {
       return xScale(d.category) + xScale.bandwidth() / 2;
     })
-    .attr("y", function(d) {
+    .attr("y", function (d) {
       return yScale(d.value) - 5;
     })
     .attr("text-anchor", "middle")
-    .text(function(d) {
+    .text(function (d) {
       return d.value;
     });
 
   // Button click
-  d3.select("#sortButton").on("click", function() {
+  d3.select("#sortButton").on("click", function () {
 
     // Sort data
-    currentData.sort(function(a, b) {
+    currentData.sort(function (a, b) {
       return b.value - a.value;
     });
 
     // Update x-scale
-    xScale.domain(currentData.map(function(d) {
+    xScale.domain(currentData.map(function (d) {
       return d.category;
     }));
 
-    // Move bars (no animation yet)
+    // Move bars
     bars
-      .data(currentData, function(d) { return d.category; })
-      .attr("x", function(d) {
+      .data(currentData, function (d) {
+        return d.category;
+      })
+      .attr("x", function (d) {
         return xScale(d.category);
       });
 
     // Move labels
     labels
-      .data(currentData, function(d) { return d.category; })
-      .attr("x", function(d) {
+      .data(currentData, function (d) {
+        return d.category;
+      })
+      .attr("x", function (d) {
         return xScale(d.category) + xScale.bandwidth() / 2;
       });
 

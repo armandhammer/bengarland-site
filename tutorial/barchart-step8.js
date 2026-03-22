@@ -29,16 +29,16 @@ svg.style("border", "1px solid black");
 var chartGroup = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Load data
-d3.csv("fruit.csv").then(function(data) {
+// Load the CSV file
+d3.csv("fruit.csv").then(function (data) {
 
   // Convert value to number
-  data.forEach(function(d) {
+  data.forEach(function (d) {
     d.value = +d.value;
   });
 
   // Save original order
-  var originalData = data.map(function(d) {
+  var originalData = data.map(function (d) {
     return {
       category: d.category,
       value: d.value
@@ -46,74 +46,84 @@ d3.csv("fruit.csv").then(function(data) {
   });
 
   // Current working copy
-  var currentData = data.map(function(d) {
+  var currentData = data.map(function (d) {
     return {
       category: d.category,
       value: d.value
     };
   });
 
-  // X scale
+  // Create x scale
   var xScale = d3.scaleBand()
-    .domain(currentData.map(function(d) { return d.category; }))
+    .domain(currentData.map(function (d) {
+      return d.category;
+    }))
     .range([0, innerWidth])
     .padding(0.2);
 
-  // Y scale
+  // Create y scale
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(currentData, function(d) { return d.value; })])
+    .domain([0, d3.max(currentData, function (d) {
+      return d.value;
+    })])
     .range([innerHeight, 0]);
 
-  // X axis
+  // Add x-axis
   var xAxisGroup = chartGroup.append("g")
     .attr("transform", "translate(0," + innerHeight + ")")
     .call(d3.axisBottom(xScale));
 
-  // Y axis
+  // Add y-axis
   chartGroup.append("g")
     .call(d3.axisLeft(yScale));
 
-  // Bars
+  // Draw bars
   var bars = chartGroup.selectAll(".bar")
     .data(currentData)
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return xScale(d.category); })
-    .attr("y", function(d) { return yScale(d.value); })
+    .attr("x", function (d) {
+      return xScale(d.category);
+    })
+    .attr("y", function (d) {
+      return yScale(d.value);
+    })
     .attr("width", xScale.bandwidth())
-    .attr("height", function(d) { return innerHeight - yScale(d.value); })
+    .attr("height", function (d) {
+      return innerHeight - yScale(d.value);
+    })
     .attr("fill", "steelblue");
 
-  // Labels
+  // Add value labels
   var labels = chartGroup.selectAll(".value-label")
     .data(currentData)
     .enter()
     .append("text")
     .attr("class", "value-label")
-    .attr("x", function(d) {
+    .attr("x", function (d) {
       return xScale(d.category) + xScale.bandwidth() / 2;
     })
-    .attr("y", function(d) {
+    .attr("y", function (d) {
       return yScale(d.value) - 5;
     })
     .attr("text-anchor", "middle")
-    .text(function(d) {
+    .text(function (d) {
       return d.value;
     });
 
   // Button click
-  d3.select("#sortButton").on("click", function() {
+  d3.select("#sortButton").on("click", function () {
 
     if (isSorted === false) {
-      currentData.sort(function(a, b) {
+      currentData.sort(function (a, b) {
         return b.value - a.value;
       });
 
       d3.select(this).text("Reset Order");
       isSorted = true;
     } else {
-      currentData = originalData.map(function(d) {
+      currentData = originalData.map(function (d) {
         return {
           category: d.category,
           value: d.value
@@ -125,21 +135,25 @@ d3.csv("fruit.csv").then(function(data) {
     }
 
     // Update x-scale domain
-    xScale.domain(currentData.map(function(d) {
+    xScale.domain(currentData.map(function (d) {
       return d.category;
     }));
 
     // Update bars
     bars
-      .data(currentData, function(d) { return d.category; })
-      .attr("x", function(d) {
+      .data(currentData, function (d) {
+        return d.category;
+      })
+      .attr("x", function (d) {
         return xScale(d.category);
       });
 
     // Update labels
     labels
-      .data(currentData, function(d) { return d.category; })
-      .attr("x", function(d) {
+      .data(currentData, function (d) {
+        return d.category;
+      })
+      .attr("x", function (d) {
         return xScale(d.category) + xScale.bandwidth() / 2;
       });
 
