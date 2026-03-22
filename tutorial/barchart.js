@@ -1,10 +1,8 @@
-// --------------------------------------------------
-// Interactive Bar Chart with Sorting in D3.js
-// --------------------------------------------------
-
+// Chart size
 var width = 700;
 var height = 400;
 
+// Margins
 var margin = {
   top: 20,
   right: 20,
@@ -15,60 +13,69 @@ var margin = {
 var innerWidth = width - margin.left - margin.right;
 var innerHeight = height - margin.top - margin.bottom;
 
-var originalData = [];
-var currentData = [];
+// Track whether chart is sorted
 var isSorted = false;
 
+// Create SVG
 var svg = d3.select("#chart")
   .append("svg")
   .attr("width", width)
   .attr("height", height);
 
+// Border for visibility
+svg.style("border", "1px solid black");
+
+// Create chart group
 var chartGroup = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// Load data
 d3.csv("fruit.csv").then(function(data) {
 
+  // Convert value to number
   data.forEach(function(d) {
     d.value = +d.value;
   });
 
-  originalData = data.map(function(d) {
+  // Save original order
+  var originalData = data.map(function(d) {
     return {
       category: d.category,
       value: d.value
     };
   });
 
-  currentData = data.map(function(d) {
+  // Current working copy
+  var currentData = data.map(function(d) {
     return {
       category: d.category,
       value: d.value
     };
   });
 
+  // X scale
   var xScale = d3.scaleBand()
     .domain(currentData.map(function(d) { return d.category; }))
     .range([0, innerWidth])
     .padding(0.2);
 
+  // Y scale
   var yScale = d3.scaleLinear()
     .domain([0, d3.max(currentData, function(d) { return d.value; })])
     .range([innerHeight, 0]);
 
+  // X axis
   var xAxisGroup = chartGroup.append("g")
     .attr("transform", "translate(0," + innerHeight + ")")
     .call(d3.axisBottom(xScale));
 
-  xAxisGroup.selectAll("text")
-    .attr("transform", "rotate(-20)")
-    .style("text-anchor", "end");
-
+  // Y axis
   chartGroup.append("g")
     .call(d3.axisLeft(yScale));
 
+  // Bars
   var bars = chartGroup.selectAll(".bar")
-    .data(currentData, function(d) { return d.category; })
+    .data(currentData)
     .enter()
     .append("rect")
     .attr("class", "bar")
@@ -78,8 +85,9 @@ d3.csv("fruit.csv").then(function(data) {
     .attr("height", function(d) { return innerHeight - yScale(d.value); })
     .attr("fill", "steelblue");
 
+  // Labels
   var labels = chartGroup.selectAll(".value-label")
-    .data(currentData, function(d) { return d.category; })
+    .data(currentData)
     .enter()
     .append("text")
     .attr("class", "value-label")
@@ -90,62 +98,61 @@ d3.csv("fruit.csv").then(function(data) {
       return yScale(d.value) - 5;
     })
     .attr("text-anchor", "middle")
-    .text(function(d) { return d.value; });
+    .text(function(d) {
+      return d.value;
+    });
 
-  function updateChart(newData) {
-    xScale.domain(newData.map(function(d) { return d.category; }));
+  // Button click
+  d3.select("#sortButton").on("click", function() {
 
-    bars.data(newData, function(d) { return d.category; })
-      .sort(function(a, b) {
-        return xScale(a.category) - xScale(b.category);
-      })
+    if (isSorted === false) {
+      currentData.sort(function(a, b) {
+        return b.value - a.value;
+      });
+
+      d3.select(this).text("Reset Order");
+      isSorted = true;
+    } else {
+      currentData = originalData.map(function(d) {
+        return {
+          category: d.category,
+          value: d.value
+        };
+      });
+
+      d3.select(this).text("Sort Descending");
+      isSorted = false;
+    }
+
+    // Update x-scale domain
+    xScale.domain(currentData.map(function(d) {
+      return d.category;
+    }));
+
+    // Animate bars
+    bars
+      .data(currentData, function(d) { return d.category; })
       .transition()
       .duration(1000)
-      .attr("x", function(d) { return xScale(d.category); });
+      .attr("x", function(d) {
+        return xScale(d.category);
+      });
 
-    labels.data(newData, function(d) { return d.category; })
-      .sort(function(a, b) {
-        return xScale(a.category) - xScale(b.category);
-      })
+    // Animate labels
+    labels
+      .data(currentData, function(d) { return d.category; })
       .transition()
       .duration(1000)
       .attr("x", function(d) {
         return xScale(d.category) + xScale.bandwidth() / 2;
       });
 
+    // Animate axis
     xAxisGroup
       .transition()
       .duration(1000)
-      .call(d3.axisBottom(xScale))
-      .on("end", function() {
-        xAxisGroup.selectAll("text")
-          .attr("transform", "rotate(-20)")
-          .style("text-anchor", "end");
-      });
-  }
+      .call(d3.axisBottom(xScale));
 
-  d3.select("#sortButton").on("click", function() {
-    var newData;
-
-    if (isSorted === false) {
-      newData = currentData.slice().sort(function(a, b) {
-        return b.value - a.value;
-      });
-      d3.select(this).text("Reset Order");
-      isSorted = true;
-    } else {
-      newData = originalData.map(function(d) {
-        return {
-          category: d.category,
-          value: d.value
-        };
-      });
-      d3.select(this).text("Sort Descending");
-      isSorted = false;
-    }
-
-    currentData = newData;
-    updateChart(currentData);
   });
 
 });
