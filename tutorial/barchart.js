@@ -64,11 +64,11 @@ d3.csv("fruit.csv").then(function(data) {
     .attr("transform", "rotate(-20)")
     .style("text-anchor", "end");
 
-  var yAxisGroup = chartGroup.append("g")
+  chartGroup.append("g")
     .call(d3.axisLeft(yScale));
 
   var bars = chartGroup.selectAll(".bar")
-    .data(currentData)
+    .data(currentData, function(d) { return d.category; })
     .enter()
     .append("rect")
     .attr("class", "bar")
@@ -79,7 +79,7 @@ d3.csv("fruit.csv").then(function(data) {
     .attr("fill", "steelblue");
 
   var labels = chartGroup.selectAll(".value-label")
-    .data(currentData)
+    .data(currentData, function(d) { return d.category; })
     .enter()
     .append("text")
     .attr("class", "value-label")
@@ -95,14 +95,18 @@ d3.csv("fruit.csv").then(function(data) {
   function updateChart(newData) {
     xScale.domain(newData.map(function(d) { return d.category; }));
 
-    bars
-      .data(newData, function(d) { return d.category; })
+    bars.data(newData, function(d) { return d.category; })
+      .sort(function(a, b) {
+        return xScale(a.category) - xScale(b.category);
+      })
       .transition()
       .duration(1000)
       .attr("x", function(d) { return xScale(d.category); });
 
-    labels
-      .data(newData, function(d) { return d.category; })
+    labels.data(newData, function(d) { return d.category; })
+      .sort(function(a, b) {
+        return xScale(a.category) - xScale(b.category);
+      })
       .transition()
       .duration(1000)
       .attr("x", function(d) {
@@ -121,14 +125,12 @@ d3.csv("fruit.csv").then(function(data) {
   }
 
   d3.select("#sortButton").on("click", function() {
-
     var newData;
 
     if (isSorted === false) {
       newData = currentData.slice().sort(function(a, b) {
         return b.value - a.value;
       });
-
       d3.select(this).text("Reset Order");
       isSorted = true;
     } else {
@@ -138,7 +140,6 @@ d3.csv("fruit.csv").then(function(data) {
           value: d.value
         };
       });
-
       d3.select(this).text("Sort Descending");
       isSorted = false;
     }
