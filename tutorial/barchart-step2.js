@@ -8,8 +8,6 @@ var svg = d3.select("#chart")
   .attr("width", width)
   .attr("height", height);
 
-svg.style("border", "1px solid black");
-
 // Load the CSV file
 d3.csv("fruit.csv").then(function(data) {
 
