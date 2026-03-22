@@ -5,5 +5,5 @@ var svg = d3.select("#chart")
   .append("svg")
   .attr("width", width)
   .attr("height", height);
-  
+
 svg.style("border", "1px solid black");

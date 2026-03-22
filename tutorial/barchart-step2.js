@@ -9,10 +9,10 @@ var svg = d3.select("#chart")
   .attr("height", height);
 
 // Load the CSV file
-d3.csv("fruit.csv").then(function(data) {
+d3.csv("fruit.csv").then(function (data) {
 
   // Convert value from text to number
-  data.forEach(function(d) {
+  data.forEach(function (d) {
     d.value = +d.value;
   });
 
