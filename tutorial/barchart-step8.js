@@ -13,6 +13,9 @@ var margin = {
 var innerWidth = width - margin.left - margin.right;
 var innerHeight = height - margin.top - margin.bottom;
 
+// Track whether chart is sorted
+var isSorted = false;
+
 // Create SVG
 var svg = d3.select("#chart")
   .append("svg")
@@ -29,13 +32,26 @@ var chartGroup = svg.append("g")
 // Load data
 d3.csv("fruit.csv").then(function(data) {
 
-  // Convert values
+  // Convert value to number
   data.forEach(function(d) {
     d.value = +d.value;
   });
 
-  // Create a copy for sorting
-  var currentData = data.slice();
+  // Save original order
+  var originalData = data.map(function(d) {
+    return {
+      category: d.category,
+      value: d.value
+    };
+  });
+
+  // Current working copy
+  var currentData = data.map(function(d) {
+    return {
+      category: d.category,
+      value: d.value
+    };
+  });
 
   // X scale
   var xScale = d3.scaleBand()
@@ -89,24 +105,38 @@ d3.csv("fruit.csv").then(function(data) {
   // Button click
   d3.select("#sortButton").on("click", function() {
 
-    // Sort data
-    currentData.sort(function(a, b) {
-      return b.value - a.value;
-    });
+    if (isSorted === false) {
+      currentData.sort(function(a, b) {
+        return b.value - a.value;
+      });
 
-    // Update x-scale
+      d3.select(this).text("Reset Order");
+      isSorted = true;
+    } else {
+      currentData = originalData.map(function(d) {
+        return {
+          category: d.category,
+          value: d.value
+        };
+      });
+
+      d3.select(this).text("Sort Descending");
+      isSorted = false;
+    }
+
+    // Update x-scale domain
     xScale.domain(currentData.map(function(d) {
       return d.category;
     }));
 
-    // Move bars (no animation yet)
+    // Update bars
     bars
       .data(currentData, function(d) { return d.category; })
       .attr("x", function(d) {
         return xScale(d.category);
       });
 
-    // Move labels
+    // Update labels
     labels
       .data(currentData, function(d) { return d.category; })
       .attr("x", function(d) {
