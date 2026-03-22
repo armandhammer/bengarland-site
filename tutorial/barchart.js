@@ -1,6 +1,5 @@
 // --------------------------------------------------
 // Interactive Bar Chart with Sorting in D3.js
-// Beginner-friendly version
 // --------------------------------------------------
 
 var width = 700;
