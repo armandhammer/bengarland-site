@@ -6,16 +6,18 @@
 
 // This runs after the page finishes loading
 $(document).ready(function () {
-  // Turn on Bootstrap Scrollspy manually
-  $('body').scrollspy({
-    target: '#indexScrollspyMenu',
-    offset: 80
-  });
+  var scrollspyMenu = document.getElementById("indexScrollspyMenu");
 
-  // Refresh Scrollspy after everything is fully loaded
-  $(window).on('load', function () {
-    $('body').scrollspy('refresh');
-  });
+  if (scrollspyMenu) {
+    $('body').scrollspy({
+      target: '#indexScrollspyMenu',
+      offset: 80
+    });
+
+    $(window).on('load', function () {
+      $('body').scrollspy('refresh');
+    });
+  }
 });
 
 // Put the current year in the footer so it updates automatically.
