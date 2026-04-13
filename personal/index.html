@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,131 +18,157 @@
   data-target tells Bootstrap which navigation list should update.
   data-offset helps the highlighted section line up better while scrolling.
 -->
+
 <body data-spy="scroll" data-target="#indexScrollspyMenu" data-offset="80">
 
-<div class="container-fluid">
-  <div class="row content-row">
+  <div class="container-fluid">
+    <div class="row content-row">
 
-    <!-- Left sidebar navigation -->
-    <div class="col-sm-3 sidenav">
-      <h2 class="site-title">Ben Garland</h2>
-      <p class="site-subtitle">Personal website and project pages</p>
+      <!-- Left sidebar navigation -->
+      <div class="col-sm-3 sidenav">
+        <h2 class="site-title">Ben Garland</h2>
+        <p class="site-subtitle">Personal website and project pages</p>
 
-      <h4>Index page sections</h4>
-      <nav id="indexScrollspyMenu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#welcomeSection">Welcome</a></li>
-        <li><a href="#carouselSection">Highlights</a></li>
-        <li><a href="#workSection">Current Work</a></li>
-        <li><a href="#contactSection">Links</a></li>
-      </ul>
-      </nav>
+        <h4>Index page sections</h4>
+        <nav id="indexScrollspyMenu">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#welcomeSection">Welcome</a></li>
+            <li><a href="#carouselSection">Highlights</a></li>
+            <li><a href="#workSection">Current Work</a></li>
+            <li><a href="#contactSection">Links</a></li>
+          </ul>
+        </nav>
 
-      <hr>
+        <hr>
 
-      <h4>Site pages</h4>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about_me.html">About Me</a></li>
-        <li><a href="research_interests.html">Research Interests</a></li>
-        <li><a href="https://meirahw.github.io/geog585-final-project" target="_blank">MyWebApp</a></li>
-        <li><a href="https://github.com/armandhammer" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
+        <h4>Site pages</h4>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about_me.html">About Me</a></li>
+          <li><a href="research_interests.html">Research Interests</a></li>
+          <li><a href="https://meirahw.github.io/geog585-final-project" target="_blank">MyWebApp</a></li>
+          <li><a href="https://github.com/armandhammer" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
 
-    <!-- Main content area -->
-    <div class="col-sm-9 main-content-area">
+      <!-- Main content area -->
+      <div class="col-sm-9 main-content-area">
 
-      <section id="welcomeSection" class="content-section">
-        <h1>Welcome</h1>
-        <p>
-          This is a simple personal site built from a Bootstrap blog-style template.
-        </p>
-        <p>
-          The site includes multiple pages, a Bootstrap carousel, and a Bootstrap scrollspy menu.
-        </p>
-      </section>
+        <section id="welcomeSection" class="content-section">
+          <h1>Welcome</h1>
+          <p>
+            This is a simple personal site built from a Bootstrap blog-style template.
+          </p>
+          <p>
+            The site includes multiple pages, a Bootstrap carousel, and a Bootstrap scrollspy menu.
+          </p>
+        </section>
 
-      <section id="carouselSection" class="content-section">
-        <h2>Highlights</h2>
-        <p>This section uses the Bootstrap carousel feature.</p>
+        <section id="carouselSection" class="content-section">
+          <h2>Highlights</h2>
+          <p>This section uses the Bootstrap carousel feature.</p>
 
-        <div id="homepageCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Small dots at the bottom of the carousel -->
-          <ol class="carousel-indicators">
-            <li data-target="#homepageCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#homepageCarousel" data-slide-to="1"></li>
-            <li data-target="#homepageCarousel" data-slide-to="2"></li>
-          </ol>
+          <div id="homepageCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Small dots at the bottom of the carousel -->
+            <ol class="carousel-indicators">
+              <li data-target="#homepageCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#homepageCarousel" data-slide-to="1"></li>
+              <li data-target="#homepageCarousel" data-slide-to="2"></li>
+            </ol>
 
-          <!-- Carousel slides -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <div class="carousel-panel panel-one">
-                <div class="carousel-caption custom-caption">
-                  <h3>Transportation Research</h3>
-                  <p>Applied work focused on everyday mobility and safer pathways.</p>
+            <!-- Carousel slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <div class="carousel-panel panel-one">
+                  <div class="carousel-caption custom-caption">
+                    <h3>Transportation Research</h3>
+                    <p>Applied work focused on everyday mobility and safer pathways.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="carousel-panel panel-two">
+                  <div class="carousel-caption custom-caption">
+                    <h3>Web Mapping</h3>
+                    <p>Course and project work using web tools to present spatial information clearly.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="carousel-panel panel-three">
+                  <div class="carousel-caption custom-caption">
+                    <h3>Project Pages</h3>
+                    <p>Simple pages that can later expand into a larger personal and academic site.</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="item">
-              <div class="carousel-panel panel-two">
-                <div class="carousel-caption custom-caption">
-                  <h3>Web Mapping</h3>
-                  <p>Course and project work using web tools to present spatial information clearly.</p>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#homepageCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#homepageCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </section>
+
+        <section id="workSection" class="content-section">
+          <h2>Current Work</h2>
+          <p>
+            A major current focus is pathway condition assessment and applied transportation research. The broader idea
+            is to build tools that help agencies
+            measure how pavement or trail surfaces actually feel to the people using them.
+          </p>
+          <p>
+            This starter site is intentionally simple, but it gives a clear foundation for adding research summaries,
+            project writeups, maps, images,
+            downloadable files, and links to future web applications.
+          </p>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="thumbnail">
+                <div class="caption">
+                  <h4>TREAD Project</h4>
+                  <p>Pathway surface condition assessment and applied transportation research.</p>
                 </div>
               </div>
             </div>
 
-            <div class="item">
-              <div class="carousel-panel panel-three">
-                <div class="carousel-caption custom-caption">
-                  <h3>Project Pages</h3>
-                  <p>Simple pages that can later expand into a larger personal and academic site.</p>
+            <div class="col-sm-4">
+              <div class="thumbnail">
+                <div class="caption">
+                  <h4>Web Mapping</h4>
+                  <p>Interactive mapping and visualization using web tools.</p>
                 </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <!-- Left and right controls -->
-          <a class="left carousel-control" href="#homepageCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="right carousel-control" href="#homepageCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </section>
+        <section id="contactSection" class="content-section">
+          <h2>Links</h2>
+          <p><strong>MyWebApp:</strong> <a href="https://meirahw.github.io/geog585-final-project" target="_blank">Open
+              external web app</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/armandhammer" target="_blank">Open GitHub profile</a>
+          </p>
+        </section>
 
-      <section id="workSection" class="content-section">
-        <h2>Current Work</h2>
-        <p>
-          A major current focus is pathway condition assessment and applied transportation research. The broader idea is to build tools that help agencies
-          measure how pavement or trail surfaces actually feel to the people using them.
-        </p>
-        <p>
-          This starter site is intentionally simple, but it gives a clear foundation for adding research summaries, project writeups, maps, images,
-          downloadable files, and links to future web applications.
-        </p>
-      </section>
-
-      <section id="contactSection" class="content-section">
-        <h2>Links</h2>
-        <p><strong>MyWebApp:</strong> <a href="https://meirahw.github.io/geog585-final-project" target="_blank">Open external web app</a></p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/armandhammer" target="_blank">Open GitHub profile</a></p>
-      </section>
-
+      </div>
     </div>
   </div>
-</div>
 
-<footer class="container-fluid site-footer">
-  <p>Ben Garland personal site | <span id="currentYear"></span></p>
-</footer>
+  <footer class="container-fluid site-footer">
+    <p>Ben Garland personal site | <span id="currentYear"></span></p>
+  </footer>
 
-<script src="myJS_scripts/site_scripts.js"></script>
+  <script src="myJS_scripts/site_scripts.js"></script>
 </body>
+
 </html>
