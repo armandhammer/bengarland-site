@@ -5,6 +5,7 @@
 */
 
 // This runs after the page finishes loading
+// Used AI to help get this code block right, because I had issues with Scrollspy not initializing properly
 $(document).ready(function () {
   var scrollspyMenu = document.getElementById("indexScrollspyMenu");
 
