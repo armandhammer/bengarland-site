@@ -1,0 +1,85 @@
+/*
+  Main custom stylesheet for the personal site.
+  This file contains styles that are easy to understand and change.
+*/
+
+body {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.content-row {
+  min-height: 100vh;
+}
+
+.sidenav {
+  background-color: #f1f1f1;
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+.site-title {
+  margin-top: 0;
+}
+
+.site-subtitle {
+  color: #666666;
+}
+
+.main-content-area {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.content-section {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #dddddd;
+}
+
+/*
+  These colored blocks act like simple carousel slides.
+  This avoids needing image files while still making the carousel easy to see.
+*/
+.carousel-panel {
+  height: 320px;
+  border-radius: 6px;
+}
+
+.panel-one {
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+}
+
+.panel-two {
+  background: linear-gradient(135deg, #3f2b96, #a8c0ff);
+}
+
+.panel-three {
+  background: linear-gradient(135deg, #134e5e, #71b280);
+}
+
+.custom-caption {
+  bottom: 40px;
+}
+
+.custom-caption h3,
+.custom-caption p {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.site-footer {
+  background-color: #555555;
+  color: white;
+  padding: 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .sidenav {
+    min-height: auto;
+    padding-bottom: 20px;
+  }
+
+  .carousel-panel {
+    height: 240px;
+  }
+}
