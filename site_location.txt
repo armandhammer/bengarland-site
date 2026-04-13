@@ -1,0 +1,3 @@
+NOTE: Because of how I already had my github set up, personal site is at:
+
+https://armandhammer.github.io/bengarland-site/personal/
